@@ -5,7 +5,7 @@ describe PagesController do
 
   describe "GET 'home'" do
 
-    it "devrait etre un succes" do
+    it "devrait etre un succès" do
       get 'home'
       response.should be_success
     end
@@ -20,7 +20,7 @@ describe PagesController do
 
   describe "GET 'contact'" do
 
-    it "devrait etre un succes" do
+    it "devrait etre un succès" do
       get 'contact'
       response.should be_success
     end
@@ -35,14 +35,14 @@ describe PagesController do
 
 	describe "GET 'about'" do
 
-		it "devrait etre un succes" do
+		it "devrait etre un succès" do
 			get 'about'
 			response.should be_success
 		end
 
 		it "devrait avoir le bon titre" do
 			get 'about'
-			response.should have_selector("title", :content => "Simple App du Tutoriel Ruby on Rails | A propos")
+			response.should have_selector("title", :content => "Simple App du Tutoriel Ruby on Rails | À propos")
 		end
 
 	end
