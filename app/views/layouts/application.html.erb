@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Simple App du Tutoriel Ruby on Rails | <%= @titre %></title>
-    <%= csrf_meta_tag %>
-  </head>
-  <body>
-    <%= yield %>
-  </body>
+	<head>
+		<title><%= titre %></title>
+		<%= csrf_meta_tag %>
+
+		<!-- La ligne suivante réfère au fichier 'app/views/layouts/_stylesheets.html.erb' -->
+		<%= render('layouts/stylesheets') %>
+	</head>
+	<body>
+		<div class="container">
+
+			<!-- La ligne suivante réfère au fichier 'app/views/layouts/_header.html.erb' -->
+			<%= render('layouts/header') %>
+
+			<!-- La section suivante inclut le corps de la page -->
+			<section class="round">
+				<%= yield %>
+			</section>
+
+			<!-- La ligne suivante réfère au fichier 'app/views/layouts/_footer.html.erb' -->
+			<%= render('layouts/footer') %>
+		</div>
+	</body>
 </html>
