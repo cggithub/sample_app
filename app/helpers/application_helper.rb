@@ -21,4 +21,20 @@ module ApplicationHelper
 
 	end	# Fin Fonction titre
 
+	# Fonction logo : retourne une balise html contenant le logo du site et un texte alternatif
+	def logo()
+		
+		# Le fichier du logo situé dans public/html/
+		fichier = "logo.png"
+		
+		# Le texte alternatif à afficher si le fichier est inaccessible
+		texte = "Application Exemple"
+		
+		# La classe CSS de la balise logo
+		classe_css = "round"
+
+		# Retourne le logo
+		return image_tag(fichier, { :alt => texte, :class => classe_css })
+	end	# Fin fonction logo
+
 end

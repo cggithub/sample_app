@@ -3,7 +3,7 @@
 	<%= link_to(logo, root_path) %>
 	<nav class="round">
 		<ul>
-			<li><%= link_to("Accueil", home_path) %></li>
+			<li><%= link_to("Accueil", root_path) %></li>
 			<li><%= link_to("Aide", help_path) %></li>
 			<li><%= link_to("Inscription", '#') %></li>
 		</ul>

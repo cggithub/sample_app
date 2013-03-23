@@ -13,7 +13,7 @@
 			<!-- La ligne suivante réfère au fichier 'app/views/layouts/_header.html.erb' -->
 			<%= render('layouts/header') %>
 
-			<!-- La section suivante inclus le corps de la page -->
+			<!-- La section suivante inclut le corps de la page -->
 			<section class="round">
 				<%= yield %>
 			</section>

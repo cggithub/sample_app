@@ -2,6 +2,10 @@
 
 class UsersController < ApplicationController
 	def new
-		@titre = "Contact"
+		@titre = "Inscription"
+	end
+
+	def show
+		@user = User.find(params[:id])
 	end
 end
