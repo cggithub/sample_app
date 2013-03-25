@@ -6,6 +6,7 @@
 
 		<!-- La ligne suivante réfère au fichier 'app/views/layouts/_stylesheets.html.erb' -->
 		<%= render('layouts/stylesheets') %>
+
 	</head>
 	<body>
 		<div class="container">
@@ -15,6 +16,13 @@
 
 			<!-- La section suivante inclut le corps de la page -->
 			<section class="round">
+
+				<!-- Affichage d'un message 'flash' de bienvenue. -->
+				<% flash.each do |key, value| %>
+					<div class="flash <%= key %>"><%= value %></div>
+				<% end %>
+
+				<!-- Affichage du reste de la page -->
 				<%= yield %>
 			</section>
 

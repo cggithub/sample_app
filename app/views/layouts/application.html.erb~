@@ -6,6 +6,12 @@
 
 		<!-- La ligne suivante réfère au fichier 'app/views/layouts/_stylesheets.html.erb' -->
 		<%= render('layouts/stylesheets') %>
+
+		<!-- Affichage d'un message 'flash' de bienvenue. -->
+		<section class="round">
+
+			<%= yield %>
+		</section>
 	</head>
 	<body>
 		<div class="container">
@@ -15,11 +21,19 @@
 
 			<!-- La section suivante inclut le corps de la page -->
 			<section class="round">
+
+				<!-- Affichage d'un message 'flash' de bienvenue. -->
+				<% flash.each do |key, value| %>
+					<div class="flash <%= key %>"><%= value %></div>
+				<% end %>
+
+				<!-- Affichage du reste de la page -->
 				<%= yield %>
 			</section>
 
 			<!-- La ligne suivante réfère au fichier 'app/views/layouts/_footer.html.erb' -->
 			<%= render('layouts/footer') %>
+			<%= debug(params) if Rails.env.development? %>
 		</div>
 	</body>
 </html>
