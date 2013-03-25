@@ -19,6 +19,27 @@ describe UsersController do
 			get(:new)
 			response.should(have_selector("title", :content => @base_title + "Inscription"))
 		end
+
+		it "devrait avoir un champ nom" do
+			get(:new)
+			response.should(have_selector("input[name='user[nom]'][type='text']"))
+		end
+
+		it "devrait avoir un champ email" do
+			get(:new)
+			response.should(have_selector("input[name='user[email]'][type='text']"))
+		end
+
+		it "devrait avoir un champ mot de passe" do
+			get(:new)
+			response.should(have_selector("input[name='user[password]'][type='password']"))
+		end
+
+		it "devrait avoir un champ confirmation" do
+			get(:new)
+			response.should(have_selector("input[name='user[password_confirmation]'][type='password']"))
+		end
+
 	end # Fin description 'new'
 
 	describe "GET 'show'" do
@@ -100,6 +121,11 @@ describe UsersController do
 			it "devrait avoir un message de bienvenue" do
 				post :create, :user => @attr
 				flash[:success].should =~ /Bienvenue dans l'Application Exemple/i
+			end
+
+			it "devrait identifier l'utilisateur" do
+				post :create, :user => @attr
+				controller.should(be_signed_in())
 			end
 		end # Fin description 'succès'
 

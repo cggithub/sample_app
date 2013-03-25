@@ -3,8 +3,14 @@
 	<nav class="round">
 		<ul>
 			<li><%= link_to("Accueil", root_path) %></li>
+			<% if signed_in?() then %>
+			<li><%= link_to("Profil", current_user) %></li>
 			<li><%= link_to("Aide", help_path) %></li>
-			<li><%= link_to("Inscription", '#') %></li>
+			 <% if signed_in?() then %>
+			<li><%= link_to("Déconnexion", signout_path, :method => :delete) %></li>
+			<% else %>
+			<li><%= link_to("S'identifier", signin_path) %></li>
+			<% end %>
 		</ul>
 	</nav>
 </header>

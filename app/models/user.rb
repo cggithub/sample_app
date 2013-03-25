@@ -54,6 +54,15 @@ class User < ActiveRecord::Base
 		return nil
 	end
 
+	# Méthode d'authentification par comparaison du sel contenu dans le cookie
+	def self.authenticate_with_salt(id, cookie_salt)
+		user = find_by_id(id)
+		if !user.nil?() && user.salt == cookie_salt then
+			return user
+		end
+		return nil
+	end
+
 	private
 		
 		# La méthode appelée avant chaque sauvegarde dans la base

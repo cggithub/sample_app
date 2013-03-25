@@ -12,8 +12,8 @@
 		<%= f.text_field(:email) %>
 	</div>
 	<div class="field">
-		<%= f.label(:password) %><br />
-		<%= f.password_field(:password) %>
+		<%= f.label(:password, "Mot de passe") %><br />
+		<%= f.password_field(:password, :value => "") %>
 	</div>
 	<div class="field">
 		<%= f.label(:password_confirmation, "Confirmation") %><br />

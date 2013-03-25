@@ -14,12 +14,20 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(params[:user])
 		if @user.save()
-			# Traite un succès d'enregistrement.
+			# Succès à l'inscription
+			sign_in @user
 			flash[:success] = "Bienvenue dans l'application exemple !"
-			redirect_to(user_path(@user))
+			redirect_to(@user)
 		else
+			# Echec à l'inscription
 			@titre = "Inscription"
-			render('new')
+			@user.password.clear()
+			@user.password_confirmation.clear()
+			# ATTENTION, BUG TOUT POURRI SPOTTED
+			# Ne pas mettre 'new' mais bien :new sinon
+			# la page n'est pas correctement interprétée
+			# Raison: aucune (rails illogique)
+			render(:new)
 		end
 	end
 end

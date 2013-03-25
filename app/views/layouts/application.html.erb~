@@ -7,11 +7,6 @@
 		<!-- La ligne suivante réfère au fichier 'app/views/layouts/_stylesheets.html.erb' -->
 		<%= render('layouts/stylesheets') %>
 
-		<!-- Affichage d'un message 'flash' de bienvenue. -->
-		<section class="round">
-
-			<%= yield %>
-		</section>
 	</head>
 	<body>
 		<div class="container">
