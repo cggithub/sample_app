@@ -56,12 +56,12 @@ describe "LayoutLinks" do
     before(:each) do
       @user = Factory(:user)
       visit(signin_path)
-      fill_in(:email, :with => @user.email)
+      fill_in(:Email, :with => @user.email)
       fill_in("Mot de passe", :with => @user.password)
       click_button()
     end
 
-    it "devrait avoir un lien de déconnxion" do
+    it "devrait avoir un lien de déconnexion" do
       visit(root_path)
       response.should(have_selector("a", :href => signout_path,
                                          :content => "Déconnexion"))
@@ -71,6 +71,12 @@ describe "LayoutLinks" do
       visit root_path
       response.should have_selector("a", :href => user_path(@user),
                                          :content => "Profil")
+    end
+
+    it "devrait avoir un lien vers l'édition de profil" do
+      visit root_path
+      response.should have_selector("a", :href => edit_user_path(@user),
+                                         :content => "Réglages")
     end
   end 
 

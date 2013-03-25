@@ -1,0 +1,13 @@
+<h1>Edition du profil</h1>
+
+<%= form_for(@user) do |f| %>
+	<%= render 'fields', :f => f %>
+	<div class="actions">
+		<%= f.submit("Mettre à jour") %>
+	</div>
+<% end %>
+
+<div>
+	<%= gravatar_for @user %>
+	<%= link_to("changer", "http://gravatar.com/emails", :target => '_blank') %>
+</div>
