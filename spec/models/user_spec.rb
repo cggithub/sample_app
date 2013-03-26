@@ -247,4 +247,42 @@ describe User do
 
 	end # Fin description validation de la date de naissance
 
+	describe "méthode age()" do
+
+		it "devrait retourner nil lorsque la date de naissance est nulle" do
+			utilisateur = User.new(@attr.merge(:dte_naissance => nil))
+			utilisateur.age().should(be_nil())
+		end
+
+		it "devrait retourner 0 lorsque la date de naissance est supérieure ou égale au jour d'aujourd'hui" do
+			utilisateur = User.new(@attr.merge(:dte_naissance => Date.today()))
+			utilisateur.age().should() == 0
+		end
+
+		it "devrait retourner un nombre" do
+			utilisateur = User.new(@attr)
+			utilisateur.age().should(be_kind_of(Numeric))
+		end
+
+	end # Fin description méthode age()
+
+	describe "méthode imc()" do
+
+		it "devrait retourner nil lorsque le poid vaut 0" do
+			utilisateur = User.new(@attr.merge(:poids => 0))
+			utilisateur.imc().should(be_nil())
+		end
+
+		it "devrait retourner nil lorsque la taille vaut 0" do
+			utilisateur = User.new(@attr.merge(:taille => 0))
+			utilisateur.imc().should(be_nil())
+		end
+
+		it "devrait retourner un nombre lorsque le poids et la taille sont supérieurs à 0" do
+			utilisateur = User.new(@attr)
+			utilisateur.imc().should(be_kind_of(Numeric))
+		end
+
+	end # Fin description méthode imc()
+
 end # Fin description User

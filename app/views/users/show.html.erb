@@ -8,7 +8,36 @@
 		</td>
 		<td class="sidebar round">
 			<strong>Nom</strong> <%= @user.nom %><br/>
-			<strong>URL</strong> <%= link_to(user_path(@user), @user) %>
+			<strong>URL</strong> <%= link_to(user_path(@user), @user) %><br/>
+			<strong>Age</strong><% age = @user.age() %>
+							<% if !age.nil?() then %>
+								<%= age.to_s() %>
+							<% else %>
+								<%= "Non-disponible" %>
+							<% end %><br/>
+			<strong>Poids</strong> <%= @user.poids %><br/>
+			<strong>Poids idéal</strong> <%= @user.poids_ideal %><br/>
+			<strong>Taille</strong> <%= @user.taille %><br/>
+			<strong>IMC</strong>	<% imc = @user.imc() %>
+								<% if !imc.nil?() then %>
+									<%= '%.1f' % imc.to_s() %>
+								<% else %>
+									<%= "Non-disponible" %>
+								<% end %><br/>
+			<strong>Je suis fumeur</strong>	<% fume = @user.fumeur?() %>
+										<% if fume then %>
+											<%= "Oui" %>
+										<% else %>
+											<%= "Non" %>
+										<% end %><br/>
+			<% if fume then %>
+				<strong>J'aimerais arrêter</strong> <% arreter = @user.souhaite_arreter?() %>
+											<% if arreter then %>
+												<%= "Oui" %>
+											<% else %>
+												<%= "Non" %>
+											<% end %><br/>
+			<% end %>
 		</td>
 	</tr>
 </table>

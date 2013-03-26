@@ -17,10 +17,6 @@
 	<%= f.text_field(:poids_ideal) %>
 </div>
 <div class="field">
-	<%= f.label(:taille) %><br />
-	<%= f.text_field(:taille) %>
-</div>
-<div class="field">
 	<%= f.label(:fumeur) %><br />
 	<%= f.check_box(:fumeur) %>
 </div>

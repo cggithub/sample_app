@@ -5,10 +5,6 @@ require 'spec_helper'
 describe UsersController do
 	render_views
 
-	before(:each) do
-		@base_title = "Simple App du Tutoriel Ruby on Rails | "
-	end
-
 	describe "GET 'new'" do
 		it "devrait réussir" do
 			get(:new)
@@ -17,7 +13,7 @@ describe UsersController do
 		
 		it "devrait avoir le bon titre" do
 			get(:new)
-			response.should(have_selector("title", :content => @base_title + "Inscription"))
+			response.should(have_selector("title", :content => "Inscription"))
 		end
 
 		it "devrait avoir un champ nom" do
@@ -40,6 +36,36 @@ describe UsersController do
 			response.should(have_selector("input[name='user[password_confirmation]'][type='password']"))
 		end
 
+		it "devrait avoir un champ poids" do
+			get(:new)
+			response.should(have_selector("input[name='user[poids]'][type='text']"))
+		end
+
+		it "devrait avoir un champ poids idéal" do
+			get(:new)
+			response.should(have_selector("input[name='user[poids_ideal]'][type='text']"))
+		end
+
+		it "devrait avoir un champ taille" do
+			get(:new)
+			response.should(have_selector("input[name='user[taille]'][type='text']"))
+		end
+
+		it "devrait avoir un champ fumeur" do
+			get(:new)
+			response.should(have_selector("input[name='user[fumeur]'][type='checkbox']"))
+		end
+
+		it "devrait avoir un champ Souhaite arreter" do
+			get(:new)
+			response.should(have_selector("input[name='user[souhaite_arreter]'][type='checkbox']"))
+		end
+
+		it "devrait avoir un champ date de naissance" do
+			get(:new)
+			response.should(have_selector("input[name='user[dte_naissance]'][type='text']"))
+		end
+
 	end # Fin description 'new'
 
 	describe "GET 'show'" do
@@ -59,19 +85,65 @@ describe UsersController do
 		end
 
 		it "devrait avoir le bon titre" do
-			get :show, :id => @user.id
+			get(:show, :id => @user.id)
 			response.should(have_selector("title", :content => @user.nom))
 		end
 
 		it "devrait inclure le nom de l'utilisateur" do
-			get :show, :id => @user.id
+			get(:show, :id => @user.id)
 			response.should(have_selector("h1", :content => @user.nom))
 		end
 
 		it "devrait avoir une image de profil" do
-			get :show, :id => @user.id
+			get(:show, :id => @user.id)
 			response.should(have_selector("h1>img", :class => "gravatar"))
 		end
+
+		it "devrait afficher le nom" do
+			get(:show, :id => @user.id)
+			response.should(have_selector("strong", :content => "Nom"))
+		end
+
+		it "devrait afficher l'url" do
+			get(:show, :id => @user.id)
+			response.should(have_selector("strong", :content => "URL"))
+		end
+
+		it "devrait afficher l'âge" do
+			get(:show, :id => @user.id)
+			response.should(have_selector("strong", :content => "Age"))
+		end
+
+		it "devrait afficher le poids" do
+			get(:show, :id => @user.id)
+			response.should(have_selector("strong", :content => "Poids"))
+		end
+
+		it "devrait afficher le poids idéal" do
+			get(:show, :id => @user.id)
+			response.should(have_selector("strong", :content => "Poids ideal"))
+		end
+
+		it "devrait afficher la taille" do
+			get(:show, :id => @user.id)
+			response.should(have_selector("strong", :content => "Taille"))
+		end
+
+		it "devrait afficher l'imc" do
+			get(:show, :id => @user.id)
+			response.should(have_selector("strong", :content => "IMC"))
+		end
+
+		it "devrait afficher la mention je suis fumeur" do
+			get(:show, :id => @user.id)
+			response.should(have_selector("strong", :content => "Je suis fumeur"))
+		end
+
+		it "devrait afficher la mention j'aimerais arrêter lorsque l'utilisateur est fumeur" do
+			get(:show, :id => @user.id)
+			response.should(have_selector("strong", :content => "J'aimerais arrêter"))
+		end
+
 	end # Fin description 'show'
 
 	describe "GET 'edit'" do
@@ -114,7 +186,7 @@ describe UsersController do
 			end
 
 			it "devrait avoir le bon titre" do
-				post :create, :user => @attr
+				post(:create, :user => @attr)
 				response.should(have_selector("title", :content => "Inscription"))
 			end
 
@@ -266,7 +338,7 @@ describe UsersController do
 
 				# Génère 31 utilisateurs différents pour ce test
 				@users = [@user, second, third]
-				30.times do
+				30.times() do
 					@users << Factory(:user, :email => Factory.next(:email))
 				end
 			end

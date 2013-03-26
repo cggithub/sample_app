@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
 	before_save(:encrypt_password)
 
 	# Retourne true si l'utilisateur est un fumeur, retourne false sinon.
-	def fumeur?
+	def fumeur?()
 		if !self.fumeur.nil?() && self.fumeur == true then
 			return true
 		end
@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
 	end
 
 	# Retourne true si l'utilisateur souhaite arrêter de fumer, retourne false sinon.
-	def souhaite_arreter?
+	def souhaite_arreter?()
 		if !self.souhaite_arreter.nil?() && self.souhaite_arreter == true then
 			return true
 		end
@@ -117,6 +117,31 @@ class User < ActiveRecord::Base
 		user = find_by_id(id)
 		if !user.nil?() && user.salt == cookie_salt then
 			return user
+		end
+		return nil
+	end
+
+	# Obtient l'âge pour l'utilisateur courant en fonction de sa date de naissance
+	def age()
+		if !dte_naissance.nil?() then
+			aujourdhui = Date.today()
+			age = aujourdhui.year() - self.dte_naissance.year()
+			if aujourdhui.yday() < self.dte_naissance.yday() then
+				age -= 1
+			end
+			return age
+		end
+		return nil
+	end
+
+	# Obtient l'IMC s'il est calculable, nil sinon.
+	def imc()
+		if (	!self.poids.nil?() &&
+			!self.taille.nil?() &&
+			self.poids > 0 &&
+			self.taille > 0 ) then
+			tailleFloat = self.taille / 100.0
+			return self.poids / (tailleFloat * tailleFloat)
 		end
 		return nil
 	end
