@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
 	# La liste des attributs accessibles à la modification par
 	# update_attributes()
-	attr_accessible(:nom, :email, :password, :password_confirmation)
+	attr_accessible(:nom, :email, :password, :password_confirmation, :poids, :poids_ideal, :taille, :fumeur, :souhaite_arreter, :dte_naissance)
 
 	# Expression régulière de vérification des Emails
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -34,10 +34,68 @@ class User < ActiveRecord::Base
 						:confirmation => true,
 						:length => { :within => 6..40 }
 			)
+
+	# Vérifie la validité du poids
+	#	- doit être existant
+	#	- doit être compris entre 0 et 600 inclus
+	#	- peut seulement être un nombre entier
+	validates(:poids,	:presence => true,
+					:inclusion   => { :in => 0..600 },
+					:numericality => { :only_integer => true }
+					)
+
+	# Vérifie la validité du poids idéal
+	#	- doit être existant
+	#	- doit être supérieur ou égal à 0
+	#	- doit être inférieur ou égal au poids
+	validates(:poids_ideal,	:presence => true,
+						:numericality => {	:only_integer => true, 
+										:greater_than_or_equal_to => 0,
+										:less_than_or_equal_to => :poids }
+						)
+
+	# Vérifie la validité de la taille
+	#	- doit être existante
+	#	- doit être supérieure ou égale à 0
+	#	- doit être inférieure ou égale à 300
+	validates(:taille,	:presence => true,
+					:numericality => {	:only_integer => true, 
+									:greater_than_or_equal_to => 0,
+									:less_than_or_equal_to => 300 }
+						)
+
+	# Vérifie la validité de la date de naissance
+	#	- doit être existante
+	#	- doit être supérieure ou égale à 1900
+	#	- doit être inférieure ou égale à aujourd'hui
+	validates(:dte_naissance,	:presence => true,
+							:timeliness => { 
+								:on_or_after => lambda { Date.new(1900, 1, 1) }, 
+								:on_or_before => lambda { Date.today() }, 
+								:type => :date
+							}
+						)
+
 	# La fonction de callback appelée avant la sauvegarde / mise à jour
 	# d'un utilisateur dans la base. Ici, le callback fait un appel à
 	# la méthode encrypt_password charchée de crypter le mot de passe
 	before_save(:encrypt_password)
+
+	# Retourne true si l'utilisateur est un fumeur, retourne false sinon.
+	def fumeur?
+		if !self.fumeur.nil?() && self.fumeur == true then
+			return true
+		end
+		return false
+	end
+
+	# Retourne true si l'utilisateur souhaite arrêter de fumer, retourne false sinon.
+	def souhaite_arreter?
+		if !self.souhaite_arreter.nil?() && self.souhaite_arreter == true then
+			return true
+		end
+		return false
+	end
 
 	# Retourne true si le mot de passe passé en paramètre correspond
 	# au mot de passe stocké en base.
@@ -87,4 +145,5 @@ class User < ActiveRecord::Base
 		def secure_hash(chaine)
 			return Digest::SHA2.hexdigest(chaine)
 		end
+
 end

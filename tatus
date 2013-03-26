@@ -1,0 +1,71 @@
+commit 106c6b3b0f6dfaebec45f8ac41c64f97cf1417ee
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Mon Mar 25 21:47:37 2013 +0100
+
+    Inscription utilisateur terminée
+
+commit 6fdd25b83c785cd72485128ff4421f3c9f3d9d29
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Mon Mar 25 17:35:22 2013 +0100
+
+    Identification et déconnexion terminées
+
+commit 0eb659dbb9d4d48eba1608469343bdfd15e9031a
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Mon Mar 25 13:45:38 2013 +0100
+
+    Inscription utilisateur terminée
+
+commit 63398d3024531818705979d65c84d79bb457fde2
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Sat Mar 23 16:04:00 2013 +0100
+
+    Modele utilisateur avec mot de passe et page profil
+
+commit ed60d8336046b1403b870db63cff9ff784870848
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Thu Mar 21 18:40:22 2013 +0100
+
+    Fin du layout et des routages
+
+commit 268125f9670c979a965a6489da7196f82fa24f99
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Thu Mar 21 17:16:27 2013 +0100
+
+    Suppression de la copie caché de l'index par défaut
+
+commit 95277716e5646f73c366caef9856f707a1aa4cb0
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Thu Mar 21 17:05:11 2013 +0100
+
+    Suppression de l'index par défaut
+
+commit 6034af65f1f831c4daecd0dfd58eb9c90ea022d1
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Thu Jan 24 16:03:31 2013 +0100
+
+    Fin Chapitre 3
+
+commit 929e3f77a49238479ad4ecf06178b1479b42074e
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Thu Jan 24 15:31:25 2013 +0100
+
+    Fini avec les pages statiques
+
+commit 146ac9acb6f6b2f3a907b0c45be83a522d6bf658
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Wed Jan 23 21:05:19 2013 +0100
+
+    Ajout d'un controleur Pages
+
+commit e097cba18c188d5937ca388511370ad34dfa0d71
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Wed Jan 23 18:57:10 2013 +0100
+
+    Amelioration du README
+
+commit 8b7a6b5e0d3adb9f80307677ed2ead2f3040a391
+Author: guillermin <clement.guillermin@etud.univ-angers.fr>
+Date:   Wed Jan 23 18:55:03 2013 +0100
+
+    Depot Initial

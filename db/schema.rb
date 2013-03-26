@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130323133232) do
+ActiveRecord::Schema.define(:version => 20130326143305) do
 
   create_table "users", :force => true do |t|
     t.string   "nom"
@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(:version => 20130323133232) do
     t.datetime "updated_at"
     t.string   "encrypted_password"
     t.string   "salt"
+    t.integer  "poids",              :default => 0,            :null => false
+    t.integer  "poids_ideal",        :default => 0,            :null => false
+    t.integer  "taille",             :default => 0,            :null => false
+    t.boolean  "fumeur",             :default => false,        :null => false
+    t.boolean  "souhaite_arreter",   :default => false,        :null => false
+    t.date     "dte_naissance",      :default => '1900-01-01', :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -1,0 +1,9 @@
+class AddDteNaissanceToUsers < ActiveRecord::Migration
+  def self.up
+    add_column :users, :dte_naissance, :date, :null => false, :default => Date.new(1900,1,1)
+  end
+
+  def self.down
+    remove_column :users, :dte_naissance
+  end
+end

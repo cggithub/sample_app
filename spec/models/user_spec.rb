@@ -10,7 +10,13 @@ describe User do
 			:nom => "Utilisateur d'exemple",
 			:email => "utilisateur@exemple.com",
 			:password => "azerty",
-			:password_confirmation => "azerty"
+			:password_confirmation => "azerty",
+			:poids => 90,
+			:poids_ideal => 86,
+			:taille => 180,
+			:fumeur => true,
+			:souhaite_arreter => true,
+			:dte_naissance => Date.new(1950, 1, 15)
 		}
 	end
 
@@ -149,5 +155,96 @@ describe User do
 		end # Fin description méthode authenticate
 
 	end # Fin description Cryptage MDP
+
+	describe "Validation du poids" do
+
+		it "devrait être positif" do
+			utilisateur_invalide = User.new(@attr.merge(:poids => -1))
+			utilisateur_invalide.should_not(be_valid())
+		end
+
+		# L'homme le plus gros du monde pèse 575 kilos
+		it "devrait être inférieur ou égal à 600 kilos" do
+			utilisateur_invalide = User.new(@attr.merge(:poids => 601))
+			utilisateur_invalide.should_not(be_valid())
+		end
+
+	end # Fin description validation du poids
+
+	describe "Validation du poids idéal" do
+
+		it "devrait être positif" do
+			utilisateur_invalide = User.new(@attr.merge(:poids_ideal => -1))
+			utilisateur_invalide.should_not(be_valid())
+		end
+
+		it "devrait être inférieur ou égal à 600 kilos" do
+			utilisateur_invalide = User.new(@attr.merge(:poids_ideal => 601))
+			utilisateur_invalide.should_not(be_valid())
+		end
+
+		it "devrait être inférieur au poids" do
+			utilisateur_invalide = User.new(@attr.merge(:poids_ideal => 91))
+			utilisateur_invalide.should_not(be_valid())
+		end
+
+	end # Fin description validation du poids idéal
+
+	describe "Validation de la taille" do
+
+		it "devrait être positive" do
+			utilisateur_invalide = User.new(@attr.merge(:taille => -1))
+			utilisateur_invalide.should_not(be_valid())
+		end
+
+		# L'homme le plus grand du monde mesurait 270 cm
+		it "devrait être inférieure ou égale à 300 cm" do
+			utilisateur_invalide = User.new(@attr.merge(:taille => 301))
+			utilisateur_invalide.should_not(be_valid())
+		end
+
+	end # Fin description validation de la taille
+
+	describe "méthode fumeur?" do
+
+		it "devrait retourner true" do
+			utilisateur = User.new(@attr)
+			utilisateur.fumeur?.should(be_true())
+		end
+
+		it "devrait retourner false" do
+			utilisateur = User.new(@attr.merge(:fumeur => false))
+			utilisateur.fumeur?.should(be_false())
+		end
+
+	end # Fin description méthode fumeur?
+
+	describe "méthode souhaite_arreter?" do
+
+		it "devrait retourner true" do
+			utilisateur = User.new(@attr)
+			utilisateur.souhaite_arreter?.should(be_true())
+		end
+
+		it "devrait retourner false" do
+			utilisateur = User.new(@attr.merge(:souhaite_arreter => false))
+			utilisateur.souhaite_arreter?.should(be_false())
+		end
+
+	end # Fin description méthode souhaite_arreter?
+
+	describe "validation de la date de naissance" do
+
+		it "devrait être supérieure ou égale à 1900" do
+			utilisateur_invalide = User.new(@attr.merge(:dte_naissance => Date.new(1899, 12, 31)))
+			utilisateur_invalide.should_not(be_valid())
+		end
+
+		it "devrait être inférieure ou égale à la date du jour" do
+			utilisateur = User.new(@attr)
+			Date.today() >= utilisateur.dte_naissance
+		end
+
+	end # Fin description validation de la date de naissance
 
 end # Fin description User
