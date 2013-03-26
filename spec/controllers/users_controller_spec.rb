@@ -63,7 +63,7 @@ describe UsersController do
 
 		it "devrait avoir un champ date de naissance" do
 			get(:new)
-			response.should(have_selector("input[name='user[dte_naissance]'][type='text']"))
+			response.should(have_selector("select[name='user[dte_naissance(1i)]']"))
 		end
 
 	end # Fin description 'new'

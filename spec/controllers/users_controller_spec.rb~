@@ -63,7 +63,7 @@ describe UsersController do
 
 		it "devrait avoir un champ date de naissance" do
 			get(:new)
-			response.should(have_selector("input[name='user[dte_naissance]'][type='text']"))
+			response.should(have_selector("select[name='user[dte_naissance(1i)]'][type='date_select']"))
 		end
 
 	end # Fin description 'new'
@@ -121,7 +121,7 @@ describe UsersController do
 
 		it "devrait afficher le poids idéal" do
 			get(:show, :id => @user.id)
-			response.should(have_selector("strong", :content => "Poids ideal"))
+			response.should(have_selector("strong", :content => "Poids idéal"))
 		end
 
 		it "devrait afficher la taille" do
