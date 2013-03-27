@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Simple App du Tutoriel Ruby on Rails | <%= @titre %></title>
-	</head>
-	<body>
-		<h1>Contact</h1>
-		<p>
-			Ceci est la page de contact de l'Application Exemple qui redirige vers le contact de
-			<a href="http://railstutorial.org/feedback">Ruby on Rails Tutorial</a>.
-		</p>
-	</body>
-</html>
+<h1>Contact</h1>
+<p>
+	Pour toute remarque ou retour éventuel sur 
+	<a href="http://ruby.railstutorial.org/contact">Ruby on Rails Tutorial</a>.
+</p>

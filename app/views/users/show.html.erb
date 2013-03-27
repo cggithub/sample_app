@@ -38,7 +38,11 @@
 												<%= "Non" %>
 											<% end %><br/>
 			<% end %>
-			<%= link_to("Accéder", @user.cv.url) %>
+			<strong>CV</strong>	<% if @user.has_cv?() then %>
+								<%= link_to("consulter", @user.cv.url) %>
+							<% else %>
+								<%= "Non-disponible" %>
+							<% end %><br/>
 		</td>
 	</tr>
 </table>

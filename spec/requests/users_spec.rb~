@@ -14,8 +14,13 @@ describe "Users" do
 					fill_in("Email", :with => "")
 					fill_in("Mot de passe", :with => "")
 					fill_in("Confirmation", :with => "")
-					# attach_file('user_cv', fixture_file_upload('/files/test.pdf', 'application/pdf'))
-					attach_file('user_cv', File.join(Rails.root, 'spec', 'fixtures/files', 'test.pdf'), 'application/pdf')
+					fill_in("Poids", :with => "")
+					fill_in("Poids ideal", :with => "")
+					fill_in("Taille", :with => "")
+					fill_in("user_fumeur", :with => "")
+					fill_in("user_souhaite_arreter", :with => "")
+					fill_in("user_dte_naissance_1i", :with => "")
+					attach_file("user_cv", File.join(Rails.root, "spec", "fixtures/files", "test.txt"), "application/pdf")
 					click_button()
 					response.should(render_template('users/new'))
 					response.should(have_selector("div#error_explanation"))
@@ -31,7 +36,13 @@ describe "Users" do
 					fill_in("Email", :with => "john@rambo.com")
 					fill_in("Mot de passe", :with => "jrambo")
 					fill_in("Confirmation", :with => "jrambo")
-					attach_file('user_cv', File.join(Rails.root, 'spec', 'fixtures/files', 'test.pdf'), 'application/pdf')
+					fill_in("Poids", :with => 95)
+					fill_in("Poids ideal", :with => 93)
+					fill_in("Taille", :with => 197)
+					fill_in("user_fumeur", :with => true)
+					fill_in("user_souhaite_arreter", :with => false)
+					fill_in("user_dte_naissance_1i", :with => "1948-06-23")
+					attach_file("user_cv", File.join(Rails.root, "spec", "fixtures/files", "test.pdf"), "application/pdf")
 					click_button()
 					response.should(have_selector("div.flash.success", :content => "Bienvenue"))
 					response.should(render_template('users/show'))
@@ -51,7 +62,7 @@ describe "Users" do
 				click_button()
 				response.should(have_selector("div.flash.error", :content => "invalid"))
 			end
-		end
+		end # Fin description échec connexion
 
 		describe "succès" do
 			it "devrait identifier un utilisateur puis le déconnecter" do
@@ -64,7 +75,8 @@ describe "Users" do
 				click_link("Déconnexion")
 				controller.should_not(be_signed_in())
 			end
-		end
-	end
+		end # Fin description succès connexion/déconnexion
+
+	end # Fin description connexion/déconnexion
 
 end

@@ -285,4 +285,13 @@ describe User do
 
 	end # Fin description méthode imc()
 
+	describe "méthode has_cv()" do
+
+		it "devrait retourner false lorsque l'utilisateur n'a pas de CV enregistré sur le serveur" do
+			utilisateur = User.new(@attr.merge(:cv => nil))
+			utilisateur.has_cv?().should(be_false())
+		end
+
+	end # Fin description méthode has_cv()
+
 end # Fin description User

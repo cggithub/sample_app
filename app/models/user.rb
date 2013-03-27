@@ -1,20 +1,22 @@
 require 'digest'
 class User < ActiveRecord::Base
 	# Password est un champs virtuel (non-représenté en base)
-	attr_accessor(:password)
+	attr_accessor(:password, :cv_path)
 
 	# La liste des attributs accessibles à la modification par
 	# update_attributes()
 	attr_accessible(:nom, :email, :password, :password_confirmation, :poids, :poids_ideal, :taille, :fumeur, :souhaite_arreter, :dte_naissance, :cv)
 
-	# Définit le chemin pour le stockage des pdf en utilisant paperclip.
+	# Le chemin du fichier PDF
+	cv_path = "#{Rails.root}/public/data/:id.pdf"
+
+	# Définit le fichier PDF attaché à cet utilisateur
 	has_attached_file(	:cv,
 					:url => "/data/:id.pdf",
-					:path => "#{Rails.root}/public/data/:id.pdf")
+					:path => cv_path)
 
-	# validates_attachment_content_type(:cv, :content_type => ['application/pdf'])
-
-	# validates_attachment_presence(:cv)
+	# Définit le type MIME du fichier autorisé comme étant uniquement un PDF
+	validates_attachment_content_type(:cv, :content_type => ['application/pdf'])
 
 	# Expression régulière de vérification des Emails
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -104,6 +106,11 @@ class User < ActiveRecord::Base
 			return true
 		end
 		return false
+	end
+
+	# Retourne true si l'utilisateur a uploadé un CV, retourne false sinon.
+	def has_cv?()
+		return File.exists?("#{Rails.root}/public/data/#{id}.pdf")
 	end
 
 	# Retourne true si le mot de passe passé en paramètre correspond

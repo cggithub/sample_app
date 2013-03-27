@@ -4,7 +4,7 @@ module ApplicationHelper
 	def titre()
 
 		# La base commune à tous les titres
-		base_titre = "Simple App du Tutoriel Ruby on Rails"
+		base_titre = "On the train for Rails"
 		
 		# Le titre pour la page est-il null ?
 		if @titre.nil?

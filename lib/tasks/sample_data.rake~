@@ -12,9 +12,9 @@ namespace :db do
 					:email => "clement.guillermin@univ-angers.fr",
 					:password => "azerty",
 					:password_confirmation => "azerty",
-					:poids => 75,
-					:poids_ideal => 70,
-					:taille => 180,
+					:poids => 70,
+					:poids_ideal => 68,
+					:taille => 179,
 					:dte_naissance => Date.new(1991, 3, 31),
 					:fumeur => false,
 					:souhaite_arreter => false)
@@ -26,22 +26,52 @@ namespace :db do
 			nom  = Faker::Name.name
 			email = "example-#{n+1}@railstutorial.org"
 			password  = "azerty"
-			poids = 55 + Random.rand(501)	# Fournit un poids aléatoire entre 55 et 555 kilos
-			poids_ideal = poids - 5 # Fournit un poids idéal toujours inférieur de 5 kilos par rapport au poids initial
-			naissance = rand_date(dte_debut, dte_fin) # Fournit une date aléatoire entre 1900 et aujourd'hui
-			taille = 100 + Random.rand(176) # Fournit une taille aléatoire entre 100 cm et 275 cm
-			fumeur = [true, false].sample() # Fournit une valeur booléenne fumeur aléatoire
-			arreter = [true, false].sample() # Fournit une valeur booléenne souhaite arrêter aléatoire
+			poids = 0
+			taille = 0
+
+			# Définit aléatoirement si l'utilisateur peut être démesuré
+			demesure = [true, false].sample()
+
+			# L'utilisateur peut être démesuré
+			if demesure then
+
+				# Fournit un poids aléatoire entre 55 et 600 kilos
+				poids = 55 + Random.rand(556)
+
+				# Fournit une taille aléatoire entre 100 cm et 300 cm
+				taille = 100 + Random.rand(201)
+
+			else # L'utilisateur a des proportions correctes
+				
+				# Fournit un poids aléatoire entre 65 et 105 kilos
+				poids = 55 + Random.rand(51)
+
+				# Fournit une taille aléatoire entre 120 cm et 200 cm
+				taille = 120 + Random.rand(81)
+			end
+
+			# Fournit un poids idéal toujours inférieur de 1 à 10 kilos
+			poids_ideal = poids - (Random.rand(10) + 1)
+			
+			# Fournit une date aléatoire entre 1900 et aujourd'hui
+			naissance = rand_date(dte_debut, dte_fin) 
+
+			# Fournit une valeur booléenne fumeur aléatoire
+			fumeur = [true, false].sample()
+
+			# Fournit une valeur booléenne souhaite arrêter aléatoire
+			arreter = [true, false].sample()
+
 			User.create!(	:nom => nom,
 						:email => email,
 						:password => password,
 						:password_confirmation => password,
-						:poids => 75,
-						:poids_ideal => 70,
-						:taille => 180,
-						:dte_naissance => Date.new(1991, 3, 31),
-						:fumeur => false,
-						:souhaite_arreter => false)
+						:poids => poids,
+						:poids_ideal => poids_ideal,
+						:taille => taille,
+						:dte_naissance => naissance,
+						:fumeur => fumeur,
+						:souhaite_arreter => arreter)
 		end
 	end
 

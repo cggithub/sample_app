@@ -33,6 +33,7 @@ module ApplicationHelper
 		# La classe CSS de la balise logo
 		classe_css = "round"
 
+		# Retourne le logo
 		return image_tag(fichier, { :alt => texte, :class => classe_css })
 	end	# Fin fonction logo
 

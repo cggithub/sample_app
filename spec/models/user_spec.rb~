@@ -247,6 +247,25 @@ describe User do
 
 	end # Fin description validation de la date de naissance
 
+	describe "méthode age()" do
+
+		it "devrait retourner nil lorsque la date de naissance est nulle" do
+			utilisateur = User.new(@attr.merge(:dte_naissance => nil))
+			utilisateur.age().should(be_nil())
+		end
+
+		it "devrait retourner 0 lorsque la date de naissance est supérieure ou égale au jour d'aujourd'hui" do
+			utilisateur = User.new(@attr.merge(:dte_naissance => Date.today()))
+			utilisateur.age().should() == 0
+		end
+
+		it "devrait retourner un nombre" do
+			utilisateur = User.new(@attr)
+			utilisateur.age().should(be_kind_of(Numeric))
+		end
+
+	end # Fin description méthode age()
+
 	describe "méthode imc()" do
 
 		it "devrait retourner nil lorsque le poid vaut 0" do
@@ -266,23 +285,13 @@ describe User do
 
 	end # Fin description méthode imc()
 
-	describe "méthode age()" do
+	describe "méthode has_cv()" do
 
-		it "devrait retourner nil lorsque la date de naissance est nulle" do
-			utilisateur = User.new(@attr.merge(:dte_naissance => nil))
-			utilisateur.age().should(be_nil())
+		it "devrait retourner false lorsque l'utilisateur n'a pas de CV enregistré sur le serveur" do
+			utilisateur = User.new(@attr.merge(:cv => nil))
+			utilisateur.has_cv?().should(be_false())
 		end
 
-		it "devrait retourner 0 lorsque la date de naissance est supérieure ou égale au jour d'aujourd'hui" do
-			utilisateur = User.new(@attr.merge(:dte_naissance => Date.today()))
-			utilisateur.age().should() == 0
-		end
-
-		it "devrait retourner un nombre" do
-			utilisateur = User.new(@attr)
-			utilisateur.age().should(be_kind_of(Numeric))
-		end
-
-	end # Fin description méthode age()
+	end # Fin description méthode has_cv()
 
 end # Fin description User
