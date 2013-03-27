@@ -15,7 +15,6 @@
 							<% else %>
 								<%= "Non-disponible" %>
 							<% end %><br/>
-<%= @user.age().to_s() %><br/>
 			<strong>Poids</strong> <%= @user.poids %><br/>
 			<strong>Poids idéal</strong> <%= @user.poids_ideal %><br/>
 			<strong>Taille</strong> <%= @user.taille %><br/>

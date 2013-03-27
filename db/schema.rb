@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326143305) do
+ActiveRecord::Schema.define(:version => 20130327095332) do
 
   create_table "users", :force => true do |t|
     t.string   "nom"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(:version => 20130326143305) do
     t.boolean  "fumeur",             :default => false,        :null => false
     t.boolean  "souhaite_arreter",   :default => false,        :null => false
     t.date     "dte_naissance",      :default => '1900-01-01', :null => false
+    t.string   "cv_file_name"
+    t.string   "cv_content_type"
+    t.integer  "cv_file_size"
+    t.datetime "cv_updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

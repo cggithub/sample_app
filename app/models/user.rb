@@ -5,7 +5,16 @@ class User < ActiveRecord::Base
 
 	# La liste des attributs accessibles à la modification par
 	# update_attributes()
-	attr_accessible(:nom, :email, :password, :password_confirmation, :poids, :poids_ideal, :taille, :fumeur, :souhaite_arreter, :dte_naissance)
+	attr_accessible(:nom, :email, :password, :password_confirmation, :poids, :poids_ideal, :taille, :fumeur, :souhaite_arreter, :dte_naissance, :cv)
+
+	# Définit le chemin pour le stockage des pdf en utilisant paperclip.
+	has_attached_file(	:cv,
+					:url => "/data/:id.pdf",
+					:path => "#{Rails.root}/public/data/:id.pdf")
+
+	# validates_attachment_content_type(:cv, :content_type => ['application/pdf'])
+
+	# validates_attachment_presence(:cv)
 
 	# Expression régulière de vérification des Emails
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

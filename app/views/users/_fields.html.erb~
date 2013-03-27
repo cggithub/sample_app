@@ -29,7 +29,7 @@
 	<%= f.check_box(:souhaite_arreter) %>
 </div>
 <div class="field">
-	<%= f.label(:dte_naissance, "Date de naissance (aaaa-mm-jj)") %><br />
+	<%= f.label(:dte_naissance, "Date de naissance") %><br />
 	<%= f.date_select(:dte_naissance, :start_year => 1900, :end_year => Date.current.year()) %>
 </div>
 <div class="field">
@@ -40,3 +40,8 @@
 	<%= f.label(:password_confirmation, "Confirmation") %><br />
 	<%= f.password_field(:password_confirmation) %>
 </div>
+<div class="field">
+	<%= f.label(:password_confirmation, "Confirmation") %><br />
+	<%= f.file_field(:cv) %>
+</div>
+
